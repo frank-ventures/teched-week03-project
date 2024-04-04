@@ -14,14 +14,23 @@ I kept track of my thoughts and tasks here: [https://frankjs.notion.site/Day-Nin
 
 ### Features!
 
-- 
+- Thumbnails display on the page!
+- A larger image represents a 'background image'!
+- The 'Unsplash' API is linked and used to allow the user to define which images they'd like to see.
+- There's a user input field on the page to allow them to update the page images.
 
 ### What went well
 
+I was able to quickly get a working implementation up and running by using simple demo code.
 
+The images changed as needed.
+
+With help and through lots of tinkering I got the Unsplash API up and running on the page. This meant that I could retrieve external images and update the page with them, and also let a user input text to search for and update these images.
 
 ### Sticky points
 
+When trying to implement the Unsplash API I went down the wrong rabbit hole! I mis-read part of the documentation and made linking my JS much harder than it needed to be.
+
+With direction from a mentor _(Thanks Manny!)_ I was able to use the correct and much simpler link to start getting images onto my page.
 
 ### Future Improvements
-
