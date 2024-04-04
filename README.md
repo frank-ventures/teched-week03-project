@@ -27,10 +27,23 @@ The images changed as needed.
 
 With help and through lots of tinkering I got the Unsplash API up and running on the page. This meant that I could retrieve external images and update the page with them, and also let a user input text to search for and update these images.
 
+I dug into the CSS and got the page elements styled nicely and positioned where I wanted.
+
+I used @Media queries to make the page respond how I wanted to for varying screen sizes, and for mobile.
+
 ### Sticky points
 
 When trying to implement the Unsplash API I went down the wrong rabbit hole! I mis-read part of the documentation and made linking my JS much harder than it needed to be.
 
-With direction from a mentor _(Thanks Manny!)_ I was able to use the correct and much simpler link to start getting images onto my page.
+With direction from a mentor _(Thanks Manny!)_ I was able to use the correct and much simpler link to start getting images onto my page!
+
+I had to search for a couple of functions _(linked to below, in Resources)_, one of them being to enable the user to hit 'enter' on their keyboard to use their search term.
 
 ### Future Improvements
+
+## Further Detail
+
+### Resources
+
+Using Media Queries in JavaScript - https://www.w3schools.com/howto/howto_js_media_queries.asp
+Simulate mouse click when 'enter' is pressed - https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
