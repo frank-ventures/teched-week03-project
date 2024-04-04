@@ -4,9 +4,15 @@ const bigBackground = document.getElementById("bigBackground");
 const searchBtn = document.getElementById("goBtn");
 const userSearchBox = document.getElementById("userSearch");
 
+// Clear input box on page load
+document.getElementById("userSearch").value = "";
+
 const accessKey = "c4FY3Wae-WwNMmxkFDUwHwSt9LlkYhc5svQ9T8ZjEzM";
 
 const newImages = [{}];
+// we "let" these so that there are defaults for the page to load with, but mainly so that the page can respond to user input and device.
+let userSearch = "coffee";
+let pageWidth = "landscape";
 
 //  Old Object from start of build
 // const myImages = [
@@ -63,8 +69,9 @@ function setBigBackground(result) {
 
 // --- --- --- ---
 // --- API ---
-async function getImage(userSearch) {
-  let temporaryLiteral = `https://api.unsplash.com/search/photos?page=1&query=${userSearch}&orientation=landscape&client_id=${accessKey}`; // the term passed in below to fetch images from Unsplash
+async function getImage() {
+  let temporaryLiteral = `https://api.unsplash.com/search/photos?page=1&query=${userSearch}&orientation=${pageWidth}&client_id=${accessKey}`; // the term passed in below to fetch images from Unsplash
+  console.log(temporaryLiteral);
   const response = await fetch(temporaryLiteral);
   // Parse the results
   dataJson = await response.json();
@@ -73,12 +80,13 @@ async function getImage(userSearch) {
 
   // A statement to make sure a result has been retrieved before running changes
   if (resultArray == 0) {
-    userSearchBox.style.backgroundColor = "orange";
-    userSearchBox.value = "Invalid Term";
+    userSearchBox.style.backgroundColor = "rgb(194, 20, 20)";
+    userSearchBox.style.color = "white";
+    userSearchBox.value = "Invalid Term!!";
     setTimeout(() => {
       userSearchBox.style.backgroundColor = "white";
       userSearchBox.value = "";
-    }, 2000);
+    }, 1200);
   } else if (resultArray.length != 0) {
     console.log("big win!!");
     thumbnailDisplay.innerHTML = "";
@@ -97,14 +105,54 @@ async function getImage(userSearch) {
 }
 
 // --- --- --- ---
+// Change page display depanding on width
+// https://www.w3schools.com/howto/howto_js_media_queries.asp
+
+function changePageOnWidth(x) {
+  if (x.matches) {
+    // If media query matches
+    // Change global variable
+    pageWidth = "portrait";
+    // Refresh images
+    getImage();
+  } else {
+    pageWidth = "landscape";
+    getImage();
+  }
+}
+
+// Create a MediaQueryList object
+let x = window.matchMedia("(max-width: 600px)");
+
+// Call listener function at run time
+changePageOnWidth(x);
+
+// Attach listener function on state changes
+x.addEventListener("change", function () {
+  changePageOnWidth(x);
+});
+
+// --- --- --- ---
 // --- Run function on page load ---
-getImage("coffee");
+getImage(userSearch);
 
 // --- --- --- ---
 // -- User Input Button --
 function changeImageWithUserSearch() {
   // Assign what the user wrote to a new variable
-  let userSearch = document.getElementById("userSearch").value;
+  userSearch = document.getElementById("userSearch").value;
   // Pass it into the next function
-  getImage(userSearch);
+  getImage();
 }
+
+// Simulate the button being clicked when user presses keyboard 'enter' instead
+// https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
+userSearchBox.addEventListener("keypress", function (event) {
+  // If the user presses the "Enter" key on the keyboard
+  if (event.key === "Enter") {
+    // Cancel the default action, if needed
+    event.preventDefault();
+    // Trigger the button element with a click
+    document.getElementById("goBtn").click();
+  }
+});

@@ -8,20 +8,27 @@
     <title>Image Gallery</title>
   </head>
   <body>
-    <h3>User Input</h3>
-    <label for="userSearch">Search for images:</label>
-    <input
-      type="text"
-      id="userSearch"
-      name="userSearch"
-      placeholder="Enter a search term"
-    />
-    <button id="goBtn" onclick="changeImageWithUserSearch();">Go!</button>
-    <h3>Thumbnails</h3>
+    <div class="user-input border">
+      <label for="userSearch">Search for images:</label>
+      <input
+        type="text"
+        id="userSearch"
+        name="userSearch"
+        placeholder="Enter a search term"
+      />
+      <button id="goBtn" onclick="changeImageWithUserSearch();">Go!</button>
+    </div>
 
-    <div class="thumbnail-display" id="thumbnailDisplay"></div>
-    <h3>Background</h3>
-
+    <div class="thumbnail-display border" id="thumbnailDisplay"></div>
+    <div class="toggle-display" id="toggleDisplay">
+      <button id="displayButton">--</button>
+    </div>
     <div class="main-background" id="bigBackground"></div>
+    <div class="frank-id border">
+      <p>
+        Made by Frank <a href="https://github.com/frank-ventures">Github</a>
+        <a href="https://www.linkedin.com/in/frankie-shrieves/">LinkedIn</a>
+      </p>
+    </div>
   </body>
 </html>
