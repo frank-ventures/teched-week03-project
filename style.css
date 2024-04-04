@@ -8,7 +8,7 @@ html {
   height: 100vh;
 }
 
-.thumbnail-display {
+/* .thumbnail-display {
   width: 1000px;
   display: flex;
   flex-direction: row;
@@ -16,7 +16,7 @@ html {
 
   position: fixed;
   z-index: 2;
-}
+} */
 
 .thumbnail-display img {
   width: 250px;
@@ -24,7 +24,7 @@ html {
 }
 
 .main-background img {
-  max-width: 100vw;
+  max-width: 1000px;
   max-height: 100vh;
 
   position: relative;
