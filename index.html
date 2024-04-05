@@ -12,7 +12,7 @@
     <title>Image Gallery</title>
   </head>
   <body>
-    <div class="user-input border">
+    <div class="user-input border background-colour">
       <label for="userSearch">Search for images:</label>
       <input
         type="text"
@@ -29,31 +29,42 @@
         Go!
       </button>
     </div>
-    <button class="button-style" id="prevImage" aria-label="previous image">
+    <button
+      class="button-style background-colour"
+      id="prevImage"
+      aria-label="previous image"
+    >
       &#8592;
     </button>
-    <button class="button-style" id="nextImage" aria-label="next image">
+    <button
+      class="button-style background-colour"
+      id="nextImage"
+      aria-label="next image"
+    >
       &#8594;
     </button>
 
     <button
-      class="toggle-display button-style"
+      class="toggle-display button-style background-colour"
       id="displayButton"
       aria-label="toggle thumbnail display"
     ></button>
 
     <div class="thumb-and-buttons">
       <button
-        class="button-style"
+        class="button-style background-colour"
         id="prevPage"
         aria-label="previous page of images"
       >
         &#8592;
       </button>
-      <div class="thumbnail-display border" id="thumbnailDisplay"></div>
-      <p class="button-style" id="currentPage">1</p>
+      <div
+        class="thumbnail-display border background-colour"
+        id="thumbnailDisplay"
+      ></div>
+      <p class="background-colour border" id="currentPage">1</p>
       <button
-        class="button-style"
+        class="button-style background-colour"
         id="nextPage"
         aria-label="next page of images"
       >
@@ -63,9 +74,15 @@
 
     <div class="main-background" id="bigBackground"></div>
 
-    <div class="frank-id border">
+    <div class="frank-id border background-colour">
+      <button
+        class="button-style background-colour"
+        id="darkToggleButton"
+        aria-label="toggles dark and light mode"
+      ></button>
       <p>
-        Made by Frank <a href="https://github.com/frank-ventures">Github</a>
+        Made by Frank
+        <a href="https://github.com/frank-ventures">Github</a>
         <a href="https://www.linkedin.com/in/frankie-shrieves/">LinkedIn</a>
       </p>
     </div>

@@ -3,6 +3,9 @@
 const thumbnailDisplay = document.getElementById("thumbnailDisplay");
 const bigBackground = document.getElementById("bigBackground");
 const currentPageDisplay = document.getElementById("currentPage");
+// Dark Mode Toggle
+const darkLightToggle = document.querySelectorAll(".background-colour");
+const darkToggleButton = document.getElementById("darkToggleButton");
 
 // User search
 const searchBtn = document.getElementById("goBtn");
@@ -26,6 +29,12 @@ let pageWidth = "landscape";
 let pageNumber = 1;
 let currentImagePosition = 0;
 
+darkToggleButton.addEventListener("click", function () {
+  for (let index = 0; index < darkLightToggle.length; index++) {
+    darkLightToggle[index].classList.toggle("background-colour");
+    darkLightToggle[index].classList.toggle("background-colour-light");
+  }
+});
 //  Old Object from start of build
 // const myImages = [
 //   {
