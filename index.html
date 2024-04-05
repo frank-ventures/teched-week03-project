@@ -3,6 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="a simple gallery app which uses Unsplash API to fetch and serve images"
+    />
     <script src="./app.js" defer></script>
     <link rel="stylesheet" href="./style.css" />
     <title>Image Gallery</title>
@@ -16,14 +20,49 @@
         name="userSearch"
         placeholder="Enter a search term"
       />
-      <button id="goBtn" onclick="changeImageWithUserSearch();">Go!</button>
+      <button
+        type="submit"
+        id="goBtn"
+        onclick="changeImageWithUserSearch();"
+        aria-label="submit search"
+      >
+        Go!
+      </button>
+    </div>
+    <button class="button-style" id="prevImage" aria-label="previous image">
+      &#8592;
+    </button>
+    <button class="button-style" id="nextImage" aria-label="next image">
+      &#8594;
+    </button>
+
+    <button
+      class="toggle-display button-style"
+      id="displayButton"
+      aria-label="toggle thumbnail display"
+    ></button>
+
+    <div class="thumb-and-buttons">
+      <button
+        class="button-style"
+        id="prevPage"
+        aria-label="previous page of images"
+      >
+        &#8592;
+      </button>
+      <div class="thumbnail-display border" id="thumbnailDisplay"></div>
+      <p class="button-style" id="currentPage">1</p>
+      <button
+        class="button-style"
+        id="nextPage"
+        aria-label="next page of images"
+      >
+        &#8594;
+      </button>
     </div>
 
-    <div class="thumbnail-display border" id="thumbnailDisplay"></div>
-    <div class="toggle-display" id="toggleDisplay">
-      <button id="displayButton">--</button>
-    </div>
     <div class="main-background" id="bigBackground"></div>
+
     <div class="frank-id border">
       <p>
         Made by Frank <a href="https://github.com/frank-ventures">Github</a>

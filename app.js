@@ -1,18 +1,30 @@
 //  -- Variables --
+// General
 const thumbnailDisplay = document.getElementById("thumbnailDisplay");
 const bigBackground = document.getElementById("bigBackground");
+const currentPageDisplay = document.getElementById("currentPage");
+
+// User search
 const searchBtn = document.getElementById("goBtn");
 const userSearchBox = document.getElementById("userSearch");
-
+// Navigation buttons
+const nextPageBtn = document.getElementById("nextPage");
+const prevPageBtn = document.getElementById("prevPage");
+const nextImage = document.getElementById("nextImage");
+const prevImage = document.getElementById("prevImage");
+// The button which toggles the thumbnail display
+const displayButton = document.getElementById("displayButton");
 // Clear input box on page load
 document.getElementById("userSearch").value = "";
-
+// For the API call
 const accessKey = "c4FY3Wae-WwNMmxkFDUwHwSt9LlkYhc5svQ9T8ZjEzM";
-
-const newImages = [{}];
+// Array to store image results in
+let newImages = [{}];
 // we "let" these so that there are defaults for the page to load with, but mainly so that the page can respond to user input and device.
 let userSearch = "coffee";
 let pageWidth = "landscape";
+let pageNumber = 1;
+let currentImagePosition = 0;
 
 //  Old Object from start of build
 // const myImages = [
@@ -37,25 +49,41 @@ function createImageElement(i) {
   newImg = document.createElement("img");
   newImg.src = i.urls.regular;
   newImg.alt = i.alt_description;
+  newImg.setAttribute("tabindex", "0");
+  // Enable a user to 'tab-enter' between images for accessibility.
+  newImg.addEventListener("keydown", function (event) {
+    if (event.key == "Enter") {
+      setBigBackground(i);
+      currentImagePosition = newImages.indexOf(i);
+    }
+  });
   newImg.addEventListener("click", function () {
+    // When a thumbnail is clicked, set the main image background to be the thumbnail.
     setBigBackground(i);
+    // 'newImages.indexOf(i)' lets us find the index position of the current object, within the newImages array.
+    console.log(
+      "Current index position of current object: ",
+      newImages.indexOf(i)
+    );
+    console.log("current image position: ", currentImagePosition);
+    currentImagePosition = newImages.indexOf(i);
+    console.log("new current image position: ", currentImagePosition);
   });
   thumbnailDisplay.appendChild(newImg);
 }
 
 function displayThumbnails(resultArray) {
-  for (let index = 0; index < resultArray.length; index++) {
-    // console.log(resultArray[index]);
-    newImages.forEach((element) => {
-      element = resultArray[index];
-      console.log("element display: ", element);
-      createImageElement(resultArray[index]);
-    });
+  // Set the new results to the array variable on the page.
+  newImages = resultArray;
+  // Display each new image in the thumbnail container
+  for (let index = 0; index < newImages.length; index++) {
+    createImageElement(newImages[index]);
   }
-  console.log("done");
 }
 
 function setBigBackground(result) {
+  console.log("a test of what to use: ", newImages[currentImagePosition]);
+  console.log(result);
   // Clear current background
   bigBackground.innerHTML = "";
   // Create new <img> element
@@ -70,7 +98,7 @@ function setBigBackground(result) {
 // --- --- --- ---
 // --- API ---
 async function getImage() {
-  let temporaryLiteral = `https://api.unsplash.com/search/photos?page=1&query=${userSearch}&orientation=${pageWidth}&client_id=${accessKey}`; // the term passed in below to fetch images from Unsplash
+  let temporaryLiteral = `https://api.unsplash.com/search/photos?page=${pageNumber}&query=${userSearch}&orientation=${pageWidth}&client_id=${accessKey}`; // the term passed in below to fetch images from Unsplash
   console.log(temporaryLiteral);
   const response = await fetch(temporaryLiteral);
   // Parse the results
@@ -85,13 +113,16 @@ async function getImage() {
     userSearchBox.value = "Invalid Term!!";
     setTimeout(() => {
       userSearchBox.style.backgroundColor = "white";
+      userSearchBox.style.color = "black";
+
       userSearchBox.value = "";
     }, 1200);
   } else if (resultArray.length != 0) {
     console.log("big win!!");
     thumbnailDisplay.innerHTML = "";
     displayThumbnails(resultArray);
-    newbackground = resultArray[4];
+    newbackground = resultArray[0];
+    currentImagePosition = 0;
     setBigBackground(newbackground);
   }
 
@@ -139,7 +170,7 @@ getImage(userSearch);
 // --- --- --- ---
 // -- User Input Button --
 function changeImageWithUserSearch() {
-  // Assign what the user wrote to a new variable
+  // Assign what the user wrote to a variable
   userSearch = document.getElementById("userSearch").value;
   // Pass it into the next function
   getImage();
@@ -156,3 +187,60 @@ userSearchBox.addEventListener("keypress", function (event) {
     document.getElementById("goBtn").click();
   }
 });
+
+displayButton.addEventListener("click", function () {
+  thumbnailDisplay.classList.toggle("hidden");
+  nextPageBtn.classList.toggle("hidden");
+  prevPageBtn.classList.toggle("hidden");
+  if (thumbnailDisplay.classList.contains("hidden")) {
+    displayButton.classList.add("thumbnail-display-hidden");
+  } else {
+    displayButton.classList.remove("thumbnail-display-hidden");
+  }
+});
+
+//  Change the image page which is given to the API query and display appropriately.
+nextPageBtn.addEventListener("click", function () {
+  pageNumber += 1;
+  getImage();
+  currentPageDisplay.textContent = pageNumber;
+});
+prevPageBtn.addEventListener("click", function () {
+  if (pageNumber > 1) {
+    pageNumber -= 1;
+    getImage();
+    currentPageDisplay.textContent = pageNumber;
+  }
+});
+// Change the image using the buttons.
+prevImage.addEventListener("click", function () {
+  if (currentImagePosition > 0) {
+    currentImagePosition -= 1;
+    setBigBackground(newImages[currentImagePosition]);
+  }
+});
+
+nextImage.addEventListener("click", function () {
+  if (currentImagePosition < newImages.length - 1) {
+    currentImagePosition += 1;
+    setBigBackground(newImages[currentImagePosition]);
+  }
+});
+
+// -- This section lets the user navigate via arrow keys, similar to the buttons --
+window.addEventListener("keydown", navigateLeftRight);
+
+function navigateLeftRight(event) {
+  // Previous
+  if (event.key === "ArrowLeft" && currentImagePosition > 0) {
+    currentImagePosition -= 1;
+    setBigBackground(newImages[currentImagePosition]);
+    // Next
+  } else if (
+    event.key === "ArrowRight" &&
+    currentImagePosition < newImages.length - 1
+  ) {
+    currentImagePosition += 1;
+    setBigBackground(newImages[currentImagePosition]);
+  }
+}
