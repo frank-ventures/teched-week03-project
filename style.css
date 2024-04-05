@@ -207,7 +207,7 @@ input::placeholder {
     text-align: center;
   }
   #currentPage {
-    bottom: -25%;
+    bottom: -20%;
   }
 }
 @media (max-width: 1280px) {
