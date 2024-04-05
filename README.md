@@ -18,6 +18,7 @@ I kept track of my thoughts and tasks here: [https://frankjs.notion.site/Day-Nin
 - A larger image represents a 'background image'!
 - The 'Unsplash' API is linked and used to allow the user to define which images they'd like to see.
 - There's a user input field on the page to allow them to update the page images.
+- Responsive design
 
 ### What went well
 
@@ -31,6 +32,8 @@ I dug into the CSS and got the page elements styled nicely and positioned where 
 
 I used @Media queries to make the page respond how I wanted to for varying screen sizes, and for mobile.
 
+I got all the buttons to function as intended adding further depth to the user interaction. Adding 'next/previous page' buttons was as simple as modifying the query string.
+
 ### Sticky points
 
 When trying to implement the Unsplash API I went down the wrong rabbit hole! I mis-read part of the documentation and made linking my JS much harder than it needed to be.
@@ -39,6 +42,9 @@ With direction from a mentor _(Thanks Manny!)_ I was able to use the correct and
 
 I had to search for a couple of functions _(linked to below, in Resources)_, one of them being to enable the user to hit 'enter' on their keyboard to use their search term.
 
+It took a while to figure out a good way to access the index position of the currently selected image _(the current object)_, however I found an inbuilt method thanks to MDN Docs which let me add the function to navigate between images.
+I made it so that the position is retained regardless of using buttons or clicking thumbnails.
+
 ### Future Improvements
 
 ## Further Detail
@@ -46,4 +52,7 @@ I had to search for a couple of functions _(linked to below, in Resources)_, one
 ### Resources
 
 Using Media Queries in JavaScript - https://www.w3schools.com/howto/howto_js_media_queries.asp
+
 Simulate mouse click when 'enter' is pressed - https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
+
+Find the index position of an object within an array - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf

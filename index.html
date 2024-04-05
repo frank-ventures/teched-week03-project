@@ -16,14 +16,23 @@
         name="userSearch"
         placeholder="Enter a search term"
       />
-      <button id="goBtn" onclick="changeImageWithUserSearch();">Go!</button>
+      <button type="submit" id="goBtn" onclick="changeImageWithUserSearch();">
+        Go!
+      </button>
     </div>
+    <button class="button-style" id="nextImage">></button>
+    <button class="button-style" id="prevImage"><</button>
 
-    <div class="thumbnail-display border" id="thumbnailDisplay"></div>
-    <div class="toggle-display" id="toggleDisplay">
-      <button id="displayButton">--</button>
+    <div class="thumb-and-buttons">
+      <button class="button-style" id="prevPage"><</button>
+      <div class="thumbnail-display border" id="thumbnailDisplay"></div>
+      <p class="button-style" id="currentPage">1</p>
+      <button class="button-style" id="nextPage">></button>
     </div>
+    <button class="toggle-display button-style" id="displayButton"></button>
+
     <div class="main-background" id="bigBackground"></div>
+
     <div class="frank-id border">
       <p>
         Made by Frank <a href="https://github.com/frank-ventures">Github</a>
