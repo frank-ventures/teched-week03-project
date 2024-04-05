@@ -38,6 +38,8 @@ The JavaScript also listens for screen width and if it's less than 600 pixels, t
 
 I got all the buttons to function as intended, adding further depth to the user interaction. Adding 'next/previous page' buttons was as simple as modifying the 'page number' in the string passed to the API query.
 
+The 'Lighthouse' score is pretty good as well!
+
 ### Sticky points
 
 When trying to implement the Unsplash API I went down the wrong rabbit hole! I mis-read part of the documentation which made linking my JS much harder than it needed to be.
