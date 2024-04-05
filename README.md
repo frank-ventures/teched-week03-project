@@ -18,36 +18,38 @@ I kept track of my thoughts and tasks here: [https://frankjs.notion.site/Day-Nin
 - A larger image represents a 'background image'!
 - The 'Unsplash' API is linked and used to allow the user to define which images they'd like to see.
 - There's a user input field on the page to allow them to update the page images.
-- Responsive design
+- Responsive design.
+- Interaction: Change images with buttons, change selection with buttons.
+- Accessibility features: Navigate via 'tab' and 'enter'. Screen-reader friendly.
 
 ### What went well
 
 I was able to quickly get a working implementation up and running by using simple demo code.
 
-The images changed as needed.
+The thumbnails change the background as needed.
 
-With help and through lots of tinkering I got the Unsplash API up and running on the page. This meant that I could retrieve external images and update the page with them, and also let a user input text to search for and update these images.
+With help, and through lots of tinkering I got the Unsplash API up and running on the page. This meant that I could retrieve external images and update the page with them, and also let a user input text to search for and update these images.
 
 I dug into the CSS and got the page elements styled nicely and positioned where I wanted.
 
 I used @Media queries to make the page respond how I wanted to for varying screen sizes, and for mobile.
 
-I got all the buttons to function as intended adding further depth to the user interaction. Adding 'next/previous page' buttons was as simple as modifying the string passed to the API query.
+The JavaScript also listens for screen width and if it's less than 600 pixels, the API will query for 'portrait' images.
+
+I got all the buttons to function as intended, adding further depth to the user interaction. Adding 'next/previous page' buttons was as simple as modifying the 'page number' in the string passed to the API query.
 
 ### Sticky points
 
-When trying to implement the Unsplash API I went down the wrong rabbit hole! I mis-read part of the documentation and made linking my JS much harder than it needed to be.
+When trying to implement the Unsplash API I went down the wrong rabbit hole! I mis-read part of the documentation which made linking my JS much harder than it needed to be.
 
 With direction from a mentor _(Thanks Manny!)_ I was able to use the correct and much simpler link to start getting images onto my page!
 
 I had to search for a couple of functions _(linked to below, in Resources)_, one of them being to enable the user to hit 'enter' on their keyboard to use their search term.
 
-It took a while to figure out a good way to access the index position of the currently selected image _(the current object)_, however I found an inbuilt method thanks to MDN Docs which let me add the function to navigate between images.
-I made it so that the position is retained regardless of using buttons or clicking thumbnails.
+It took a while to figure out a good way to access the index position of the currently selected image _(which is the current object)_, however I found an inbuilt method, .indexOf, thanks to MDN Docs which let me add the function to navigate between images.
+I made it so that the array position is retained regardless of using buttons, the keyboard or clicking thumbnails.
 
 ### Future Improvements
-
-## Further Detail
 
 ### Resources
 

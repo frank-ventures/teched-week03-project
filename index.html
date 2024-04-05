@@ -16,20 +16,45 @@
         name="userSearch"
         placeholder="Enter a search term"
       />
-      <button type="submit" id="goBtn" onclick="changeImageWithUserSearch();">
+      <button
+        type="submit"
+        id="goBtn"
+        onclick="changeImageWithUserSearch();"
+        aria-label="submit search"
+      >
         Go!
       </button>
     </div>
-    <button class="button-style" id="prevImage"><</button>
-    <button class="button-style" id="nextImage">></button>
+    <button class="button-style" id="prevImage" aria-label="previous image">
+      &#8592;
+    </button>
+    <button class="button-style" id="nextImage" aria-label="next image">
+      &#8594;
+    </button>
 
-    <button class="toggle-display button-style" id="displayButton"></button>
+    <button
+      class="toggle-display button-style"
+      id="displayButton"
+      aria-label="toggle thumbnail display"
+    ></button>
 
     <div class="thumb-and-buttons">
-      <button class="button-style" id="prevPage"><</button>
+      <button
+        class="button-style"
+        id="prevPage"
+        aria-label="previous page of images"
+      >
+        &#8592;
+      </button>
       <div class="thumbnail-display border" id="thumbnailDisplay"></div>
       <p class="button-style" id="currentPage">1</p>
-      <button class="button-style" id="nextPage">></button>
+      <button
+        class="button-style"
+        id="nextPage"
+        aria-label="next page of images"
+      >
+        &#8594;
+      </button>
     </div>
 
     <div class="main-background" id="bigBackground"></div>
