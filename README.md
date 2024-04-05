@@ -32,7 +32,7 @@ I dug into the CSS and got the page elements styled nicely and positioned where 
 
 I used @Media queries to make the page respond how I wanted to for varying screen sizes, and for mobile.
 
-I got all the buttons to function as intended adding further depth to the user interaction. Adding 'next/previous page' buttons was as simple as modifying the query string.
+I got all the buttons to function as intended adding further depth to the user interaction. Adding 'next/previous page' buttons was as simple as modifying the string passed to the API query.
 
 ### Sticky points
 
@@ -56,3 +56,7 @@ Using Media Queries in JavaScript - https://www.w3schools.com/howto/howto_js_med
 Simulate mouse click when 'enter' is pressed - https://www.w3schools.com/howto/howto_js_trigger_button_enter.asp
 
 Find the index position of an object within an array - https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+
+Keydown event - https://developer.mozilla.org/en-US/docs/Web/API/Element/keydown_event
+
+Using && operators - https://www.w3schools.com/js/js_comparisons.asp

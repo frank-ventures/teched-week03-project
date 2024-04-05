@@ -49,6 +49,14 @@ function createImageElement(i) {
   newImg = document.createElement("img");
   newImg.src = i.urls.regular;
   newImg.alt = i.alt_description;
+  newImg.setAttribute("tabindex", "0");
+  // Enable a user to 'tab-enter' between images for accessibility.
+  newImg.addEventListener("keydown", function (event) {
+    if (event.key == "Enter") {
+      setBigBackground(i);
+      currentImagePosition = newImages.indexOf(i);
+    }
+  });
   newImg.addEventListener("click", function () {
     // When a thumbnail is clicked, set the main image background to be the thumbnail.
     setBigBackground(i);
@@ -204,6 +212,13 @@ prevPageBtn.addEventListener("click", function () {
     currentPageDisplay.textContent = pageNumber;
   }
 });
+// Change the image using the buttons.
+prevImage.addEventListener("click", function () {
+  if (currentImagePosition > 0) {
+    currentImagePosition -= 1;
+    setBigBackground(newImages[currentImagePosition]);
+  }
+});
 
 nextImage.addEventListener("click", function () {
   if (currentImagePosition < newImages.length - 1) {
@@ -212,9 +227,20 @@ nextImage.addEventListener("click", function () {
   }
 });
 
-prevImage.addEventListener("click", function () {
-  if (currentImagePosition > 0) {
+// -- This section lets the user navigate via arrow keys, similar to the buttons --
+window.addEventListener("keydown", navigateLeftRight);
+
+function navigateLeftRight(event) {
+  // Previous
+  if (event.key === "ArrowLeft" && currentImagePosition > 0) {
     currentImagePosition -= 1;
     setBigBackground(newImages[currentImagePosition]);
+    // Next
+  } else if (
+    event.key === "ArrowRight" &&
+    currentImagePosition < newImages.length - 1
+  ) {
+    currentImagePosition += 1;
+    setBigBackground(newImages[currentImagePosition]);
   }
-});
+}
