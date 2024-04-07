@@ -5,6 +5,7 @@ const bigBackground = document.getElementById("bigBackground");
 const currentPageDisplay = document.getElementById("currentPage");
 // Dark Mode Toggle
 const darkLightToggle = document.querySelectorAll(".background-colour");
+const shadow = document.querySelectorAll(".shadow");
 const darkToggleButton = document.getElementById("darkToggleButton");
 
 // User search
@@ -24,7 +25,7 @@ const accessKey = "c4FY3Wae-WwNMmxkFDUwHwSt9LlkYhc5svQ9T8ZjEzM";
 // Array to store image results in
 let newImages = [{}];
 // we "let" these so that there are defaults for the page to load with, but mainly so that the page can respond to user input and device.
-let userSearch = "coffee";
+let userSearch = "black";
 let pageWidth = "landscape";
 let pageNumber = 1;
 let currentImagePosition = 0;
@@ -33,6 +34,10 @@ darkToggleButton.addEventListener("click", function () {
   for (let index = 0; index < darkLightToggle.length; index++) {
     darkLightToggle[index].classList.toggle("background-colour");
     darkLightToggle[index].classList.toggle("background-colour-light");
+  }
+  for (let index = 0; index < shadow.length; index++) {
+    shadow[index].classList.toggle("shadow");
+    shadow[index].classList.toggle("shadow-light");
   }
 });
 //  Old Object from start of build
@@ -199,13 +204,6 @@ userSearchBox.addEventListener("keypress", function (event) {
 
 displayButton.addEventListener("click", function () {
   thumbnailDisplay.classList.toggle("hidden");
-  nextPageBtn.classList.toggle("hidden");
-  prevPageBtn.classList.toggle("hidden");
-  if (thumbnailDisplay.classList.contains("hidden")) {
-    displayButton.classList.add("thumbnail-display-hidden");
-  } else {
-    displayButton.classList.remove("thumbnail-display-hidden");
-  }
 });
 
 //  Change the image page which is given to the API query and display appropriately.
