@@ -25,7 +25,7 @@ const accessKey = "c4FY3Wae-WwNMmxkFDUwHwSt9LlkYhc5svQ9T8ZjEzM";
 // Array to store image results in
 let newImages = [{}];
 // we "let" these so that there are defaults for the page to load with, but mainly so that the page can respond to user input and device.
-let userSearch = "black";
+let userSearch = "orange";
 let pageWidth = "landscape";
 let pageNumber = 1;
 let currentImagePosition = 0;
@@ -96,8 +96,8 @@ function displayThumbnails(resultArray) {
 }
 
 function setBigBackground(result) {
-  console.log("a test of what to use: ", newImages[currentImagePosition]);
-  console.log(result);
+  // console.log("a test of what to use: ", newImages[currentImagePosition]);
+  // console.log(result);
   // Clear current background
   bigBackground.innerHTML = "";
   // Create new <img> element
@@ -135,8 +135,7 @@ async function getImage() {
     console.log("big win!!");
     thumbnailDisplay.innerHTML = "";
     displayThumbnails(resultArray);
-    newbackground = resultArray[0];
-    currentImagePosition = 0;
+    newbackground = resultArray[currentImagePosition];
     setBigBackground(newbackground);
   }
 
@@ -187,6 +186,7 @@ function changeImageWithUserSearch() {
   // Assign what the user wrote to a variable
   userSearch = document.getElementById("userSearch").value;
   // Pass it into the next function
+  currentImagePosition = 0;
   getImage();
 }
 
@@ -205,49 +205,58 @@ userSearchBox.addEventListener("keypress", function (event) {
 displayButton.addEventListener("click", function () {
   thumbnailDisplay.classList.toggle("hidden");
 });
+console.log(currentImagePosition);
 
-//  Change the image page which is given to the API query and display appropriately.
-nextPageBtn.addEventListener("click", function () {
+// Functions to change background image, and change set of images.
+// Makes *heavy* use of 'curremntImagePosition' to ensure the user flicks through images sequentially, both backwards and forwards.
+function advanceImage() {
+  if (currentImagePosition < newImages.length - 1) {
+    currentImagePosition += 1;
+    setBigBackground(newImages[currentImagePosition]);
+  } else if ((currentImagePosition = newImages.length)) {
+    advancePage();
+    currentImagePosition = 0;
+  }
+}
+
+function reverseImage() {
+  if (currentImagePosition > 0) {
+    currentImagePosition -= 1;
+    setBigBackground(newImages[currentImagePosition]);
+  } else if (currentImagePosition === 0 && pageNumber > 1) {
+    currentImagePosition = 9;
+    reversePage();
+  }
+}
+
+function advancePage() {
   pageNumber += 1;
   getImage();
   currentPageDisplay.textContent = pageNumber;
-});
-prevPageBtn.addEventListener("click", function () {
+}
+
+function reversePage() {
   if (pageNumber > 1) {
     pageNumber -= 1;
     getImage();
     currentPageDisplay.textContent = pageNumber;
   }
-});
+}
+//  Change the image page which is given to the API query, then display appropriately.
+nextPageBtn.addEventListener("click", advancePage);
+prevPageBtn.addEventListener("click", reversePage);
 // Change the image using the buttons.
-prevImage.addEventListener("click", function () {
-  if (currentImagePosition > 0) {
-    currentImagePosition -= 1;
-    setBigBackground(newImages[currentImagePosition]);
-  }
-});
-
-nextImage.addEventListener("click", function () {
-  if (currentImagePosition < newImages.length - 1) {
-    currentImagePosition += 1;
-    setBigBackground(newImages[currentImagePosition]);
-  }
-});
-
-// -- This section lets the user navigate via arrow keys, similar to the buttons --
+nextImage.addEventListener("click", advanceImage);
+prevImage.addEventListener("click", reverseImage);
+// Change the image using the keyboard.
 window.addEventListener("keydown", navigateLeftRight);
 
 function navigateLeftRight(event) {
   // Previous
-  if (event.key === "ArrowLeft" && currentImagePosition > 0) {
-    currentImagePosition -= 1;
-    setBigBackground(newImages[currentImagePosition]);
+  if (event.key === "ArrowLeft") {
+    reverseImage();
     // Next
-  } else if (
-    event.key === "ArrowRight" &&
-    currentImagePosition < newImages.length - 1
-  ) {
-    currentImagePosition += 1;
-    setBigBackground(newImages[currentImagePosition]);
+  } else if (event.key === "ArrowRight") {
+    advanceImage();
   }
 }
