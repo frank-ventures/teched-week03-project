@@ -63,6 +63,7 @@ function createImageElement(i) {
   newImg = document.createElement("img");
   newImg.src = i.urls.regular;
   newImg.alt = i.alt_description;
+  newImg.classList.add("thumbnail-image");
   newImg.setAttribute("tabindex", "0");
   // Enable a user to 'tab-enter' between images for accessibility.
   newImg.addEventListener("keydown", function (event) {
@@ -97,7 +98,6 @@ function displayThumbnails(resultArray) {
 
 function setBigBackground(result) {
   // console.log("a test of what to use: ", newImages[currentImagePosition]);
-  // console.log(result);
   // Clear current background
   bigBackground.innerHTML = "";
   // Create new <img> element
@@ -107,6 +107,7 @@ function setBigBackground(result) {
   newBig.alt = result.alt_description;
   // Add img to page
   bigBackground.appendChild(newBig);
+  updateScrollBar(result);
 }
 
 // --- --- --- ---
@@ -205,7 +206,6 @@ userSearchBox.addEventListener("keypress", function (event) {
 displayButton.addEventListener("click", function () {
   thumbnailDisplay.classList.toggle("hidden");
 });
-console.log(currentImagePosition);
 
 // Functions to change background image, and change set of images.
 // Makes *heavy* use of 'curremntImagePosition' to ensure the user flicks through images sequentially, both backwards and forwards.
@@ -258,5 +258,45 @@ function navigateLeftRight(event) {
     // Next
   } else if (event.key === "ArrowRight") {
     advanceImage();
+  }
+}
+
+// Fancy scroll bar positioning, thanks to Sam.
+// This checks which image is currently active, then updates the thumbnail scroll bar to highlight and match
+function updateScrollBar(currentImage) {
+  let thumbnails = thumbnailDisplay.querySelectorAll(".thumbnail-image");
+  let activeThumbnail;
+  thumbnails.forEach(function (thumb) {
+    if (thumb.getAttribute("src") === currentImage.urls.regular) {
+      activeThumbnail = thumb;
+    } else {
+      thumb.style.border = "none";
+    }
+  });
+
+  if (activeThumbnail) {
+    // getBoundingClientRect returns a fancy object that tells us where our elements are on the page.
+    const thumbRect = activeThumbnail.getBoundingClientRect();
+    const containerRect = thumbnailDisplay.getBoundingClientRect();
+    activeThumbnail.style.border = "3px solid orange";
+    activeThumbnail.style.height = "125px";
+
+    // Calculate the position to scroll to, centering the active thumbnail. Sam found this online, I edited it to work for mobile and desktop.
+    let scrollLeftPos;
+    if (x.matches) {
+      scrollLeftPos =
+        activeThumbnail.offsetLeft +
+        thumbRect.width / 2 -
+        containerRect.width / 2;
+    } else {
+      scrollLeftPos =
+        activeThumbnail.offsetLeft +
+        thumbRect.width * 0.5 -
+        containerRect.width;
+    }
+    thumbnailDisplay.scrollTo({
+      left: scrollLeftPos,
+      behavior: "smooth",
+    });
   }
 }

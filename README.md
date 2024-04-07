@@ -18,9 +18,11 @@ I kept track of my thoughts and tasks here: [https://frankjs.notion.site/Day-Nin
 - A larger image represents a 'background image'!
 - The 'Unsplash' API is linked and used to allow the user to define which images they'd like to see.
 - There's a user input field on the page to allow them to update the page images.
-- Responsive design.
+- Responsive design: looks great on mobile and desktop!
 - Interaction: Change images with buttons, change selection with buttons.
 - Accessibility features: Navigate via 'tab' and 'enter'. Screen-reader friendly.
+- Infinite scroll! Pages and images just keep loading the more you click!
+- The thumbnail bar keeps up with your currently selected image.
 
 ### What went well
 
@@ -32,7 +34,7 @@ With help, and through lots of tinkering I got the Unsplash API up and running o
 
 I dug into the CSS and got the page elements styled nicely and positioned where I wanted.
 
-I used @Media queries to make the page respond how I wanted to for varying screen sizes, and for mobile.
+I used @Media queries to make the page respond how I wanted to for varying screen sizes, and for mobile. I was _very_ happy with the result.
 
 The JavaScript also listens for screen width and if it's less than 600 pixels, the API will query for 'portrait' images.
 
@@ -51,7 +53,20 @@ I had to search for a couple of functions _(linked to below, in Resources)_, one
 It took a while to figure out a good way to access the index position of the currently selected image _(which is the current object)_, however I found an inbuilt method, .indexOf, thanks to MDN Docs which let me add the function to navigate between images.
 I made it so that the array position is retained regardless of using buttons, the keyboard or clicking thumbnails.
 
-### Future Improvements
+### Bonus points
+
+I created a "Light/Dark" mode toggle.
+
+I was able to add some extra code which automatically loaded the next page of images if the user gets to the end of the current set, or, goes to the previous page if they're going back.
+
+I also studied some sample code provided by one of our tutors, to enable the thumbnail scroll bar to keep up with the currently selected image.
+I got this functionality working on mobile and desktop by editing in an 'if' statement, and also, enhanced it by giving the "current thumbnail" a highlighted border.
+
+### Future improvements
+
+- Slick transition animations
+- Swipe functionality
+- "Download this image" button
 
 ### Resources
 
