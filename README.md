@@ -23,6 +23,7 @@ I kept track of my thoughts and tasks here: [https://frankjs.notion.site/Day-Nin
 - Accessibility features: Navigate via 'tab' and 'enter'. Screen-reader friendly.
 - Infinite scroll! Pages and images just keep loading the more you click!
 - The thumbnail bar keeps up with your currently selected image.
+- Image quality toggle
 
 ### What went well
 

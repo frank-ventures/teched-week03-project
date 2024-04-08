@@ -145,11 +145,14 @@ input::placeholder {
   bottom: 50%;
 }
 
-#toggleQuality {
-  position: absolute;
-  z-index: 2;
-  right: 5%;
-  top: 5%;
+.toggle-buttons {
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  width: 100%;
+
+  gap: 5px;
 }
 
 .thumbnail-display {
@@ -256,6 +259,10 @@ input::placeholder {
     width: 100vw;
     flex-direction: row;
     overflow: scroll;
+  }
+
+  .thumb-and-buttons {
+    bottom: 6%;
   }
 
   .thumbnail-display img {

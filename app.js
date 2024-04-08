@@ -7,7 +7,6 @@ const currentPageDisplay = document.getElementById("currentPage");
 const darkLightToggle = document.querySelectorAll(".background-colour");
 const shadow = document.querySelectorAll(".shadow");
 const darkToggleButton = document.getElementById("darkToggleButton");
-
 // User search
 const searchBtn = document.getElementById("goBtn");
 const userSearchBox = document.getElementById("userSearch");
@@ -18,6 +17,8 @@ const nextImage = document.getElementById("nextImage");
 const prevImage = document.getElementById("prevImage");
 // The button which toggles the thumbnail display
 const displayButton = document.getElementById("displayButton");
+// The button which toggles the image quality
+const toggleQuality = document.getElementById("toggleQuality");
 // Clear input box on page load
 document.getElementById("userSearch").value = "";
 // For the API call
@@ -29,6 +30,7 @@ let userSearch = "orange";
 let pageWidth = "landscape";
 let pageNumber = 1;
 let currentImagePosition = 0;
+let imageQuality = "regular";
 
 darkToggleButton.addEventListener("click", function () {
   for (let index = 0; index < darkLightToggle.length; index++) {
@@ -38,6 +40,20 @@ darkToggleButton.addEventListener("click", function () {
   for (let index = 0; index < shadow.length; index++) {
     shadow[index].classList.toggle("shadow");
     shadow[index].classList.toggle("shadow-light");
+  }
+});
+
+toggleQuality.addEventListener("click", function () {
+  if (imageQuality === "regular") {
+    imageQuality = "full";
+    console.log("new quality: ", imageQuality);
+    setBigBackground(newImages[currentImagePosition]);
+    toggleQuality.textContent = "HQ";
+  } else if (imageQuality === "full") {
+    imageQuality = "regular";
+    console.log("new quality: ", imageQuality);
+    setBigBackground(newImages[currentImagePosition]);
+    toggleQuality.textContent = "LQ";
   }
 });
 //  Old Object from start of build
@@ -103,7 +119,12 @@ function setBigBackground(result) {
   // Create new <img> element
   newBig = document.createElement("img");
   // Set element attributes
-  newBig.src = result.urls.regular;
+  if (imageQuality === "regular") {
+    newBig.src = result.urls.regular;
+  } else if (imageQuality === "full") {
+    newBig.src = result.urls.full;
+  }
+
   newBig.alt = result.alt_description;
   // Add img to page
   bigBackground.appendChild(newBig);
