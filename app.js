@@ -61,7 +61,7 @@ darkToggleButton.addEventListener("click", function () {
 function createImageElement(i) {
   // 'i' is the resultArray[index] we passed in.
   newImg = document.createElement("img");
-  newImg.src = i.urls.regular;
+  newImg.src = i.urls.thumb;
   newImg.alt = i.alt_description;
   newImg.classList.add("thumbnail-image");
   newImg.setAttribute("tabindex", "0");
@@ -267,7 +267,7 @@ function updateScrollBar(currentImage) {
   let thumbnails = thumbnailDisplay.querySelectorAll(".thumbnail-image");
   let activeThumbnail;
   thumbnails.forEach(function (thumb) {
-    if (thumb.getAttribute("src") === currentImage.urls.regular) {
+    if (thumb.getAttribute("src") === currentImage.urls.thumb) {
       activeThumbnail = thumb;
     } else {
       thumb.style.border = "none";

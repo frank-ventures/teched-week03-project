@@ -145,6 +145,13 @@ input::placeholder {
   bottom: 50%;
 }
 
+#toggleQuality {
+  position: absolute;
+  z-index: 2;
+  right: 5%;
+  top: 5%;
+}
+
 .thumbnail-display {
   height: auto;
   /* width: 700px; */
