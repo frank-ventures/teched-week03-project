@@ -2,6 +2,8 @@
 
 ## Project- Building an accessible image gallery
 
+**Link to live project:** https://frank-ventures.github.io/teched-week03-project/
+
 This week we were tasked to combine what we'd learned about accessibility, @media queries, responsiveness, APIs and user interaction, on top of our existing HTML, CSS and JavaScript knowledge.
 
 There were three main sections to the project this week:
